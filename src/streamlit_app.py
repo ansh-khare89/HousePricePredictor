@@ -1,18 +1,17 @@
 import streamlit as st
-import pandas as pd
-import joblib  # use joblib instead of pickle
+import joblib
 
 st.title("House Price Predictor")
 
-# Load your trained model
+# Load the trained model
 model = joblib.load("src/model.pkl")
 
-# User input
-bedrooms = st.number_input("Number of bedrooms", min_value=1, max_value=10, value=3)
-bathrooms = st.number_input("Number of bathrooms", min_value=1, max_value=10, value=2)
-sqft = st.number_input("Square feet", min_value=100, max_value=10000, value=1000)
+# User input for the 3 features
+RM = st.number_input("Average number of rooms (RM)", min_value=1.0, max_value=10.0, value=6.0)
+LSTAT = st.number_input("Lower status of the population (%) (LSTAT)", min_value=0.0, max_value=40.0, value=12.0)
+PTRATIO = st.number_input("Pupil-teacher ratio (PTRATIO)", min_value=1.0, max_value=30.0, value=15.0)
 
 # Predict
 if st.button("Predict Price"):
-    prediction = model.predict([[bedrooms, bathrooms, sqft]])
+    prediction = model.predict([[RM, LSTAT, PTRATIO]])
     st.write(f"Predicted House Price: ${prediction[0]:,.2f}")
