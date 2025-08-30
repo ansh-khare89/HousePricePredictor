@@ -4,8 +4,8 @@ import pickle
 
 st.title("House Price Predictor")
 
-# Load your trained model
-with open("model.pkl", "rb") as f:
+# Load your trained model (fixed path)
+with open("src/model.pkl", "rb") as f:
     model = pickle.load(f)
 
 # User input
