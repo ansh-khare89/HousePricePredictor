@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib  # use joblib instead of pickle
 
 st.title("House Price Predictor")
 
-# Load your trained model (fixed path)
-with open("src/model.pkl", "rb") as f:
-    model = pickle.load(f)
+# Load your trained model
+model = joblib.load("src/model.pkl")
 
 # User input
 bedrooms = st.number_input("Number of bedrooms", min_value=1, max_value=10, value=3)
